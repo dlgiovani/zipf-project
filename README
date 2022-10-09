@@ -1,5 +1,5 @@
 The goal is to create an application that displays the frequency of objects from a collection in an 
 easy to understand and visualize way, correlating it to Zipf's observations.
 
-The project is in BETA version yet, and it already shows the frequency of words in text files.
+The project is on its really early version yet, and it already shows the frequency of words in text files.
 I don't recommend the .exe file, for several reasons, it is better to just execute the .py file.
