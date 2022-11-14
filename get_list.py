@@ -1,4 +1,4 @@
-import re, json
+import re, json, treat_file
 
 dictionary  = {}
 
@@ -23,8 +23,9 @@ def get_dict():
 
 def get_list():
     listing     = []
-    text = open('text.txt', 'r')
-    for line in text.readlines():
+    #text = open('text.txt', 'r')
+    text = treat_file.get_list()
+    for line in text:
         line = clean(line)
         for index in listing:
             if index[0] == line[0]:
@@ -38,7 +39,7 @@ def get_list():
         else:
             listing.append( [   line[0],   [ [line, 1] ]   ] )
     
-    text.close()
+    #text.close()
     return listing
 
 
@@ -61,7 +62,7 @@ def get_unordered_list():
     text.close()
     return ordList
 
-def get_ordered_list(index, orderBy):
+def get_ordered_list(index, orderBy, limit):
     text = open('text.txt', 'r')
     listing = []
     ordList     = [[],[]]
@@ -74,6 +75,10 @@ def get_ordered_list(index, orderBy):
     
     listing.sort(key=lambda i:i[index], reverse = orderBy)
 
+    if limit > len(listing):
+        limit = len(listing)
+
+    listing = [listing[i] for i in range(limit)]
 
     for listItem in listing:
         ordList[0].append(listItem[0])
@@ -81,5 +86,4 @@ def get_ordered_list(index, orderBy):
 
     text.close()
     return ordList
-
 
