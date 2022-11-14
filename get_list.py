@@ -1,8 +1,6 @@
 import re, json
 
 dictionary  = {}
-listing     = []
-ordList     = [[],[]]
 
 def clean(line):
     return re.sub(r'\n', '', line.lower())
@@ -24,6 +22,7 @@ def get_dict():
     return dictionary
 
 def get_list():
+    listing     = []
     text = open('text.txt', 'r')
     for line in text.readlines():
         line = clean(line)
@@ -43,7 +42,8 @@ def get_list():
     return listing
 
 
-def get_ordered_list(limit):
+def get_unordered_list():
+    ordList     = [[],[]]
     text = open('text.txt', 'r')
 
     for line in text.readlines():
@@ -60,3 +60,26 @@ def get_ordered_list(limit):
     
     text.close()
     return ordList
+
+def get_ordered_list(index, orderBy):
+    text = open('text.txt', 'r')
+    listing = []
+    ordList     = [[],[]]
+
+    thisList = get_list()
+
+    for order in thisList:
+        for wordObj in order[1]:
+            listing.append(wordObj)
+    
+    listing.sort(key=lambda i:i[index], reverse = orderBy)
+
+
+    for listItem in listing:
+        ordList[0].append(listItem[0])
+        ordList[1].append(listItem[1])
+
+    text.close()
+    return ordList
+
+
