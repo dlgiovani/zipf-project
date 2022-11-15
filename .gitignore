@@ -1,2 +1,4 @@
 
 *.pyc
+__pycache__/get_list.cpython-310.pyc
+.gitignore
