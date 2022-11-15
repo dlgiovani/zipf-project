@@ -62,7 +62,7 @@ def get_unordered_list():
     text.close()
     return ordList
 
-def get_ordered_list(index, orderBy, limit):
+def get_ordered_list(orderBy = False, limit = 10, wordSizeMin = 0, index = 0):
     text = open('text.txt', 'r')
     listing = []
     ordList     = [[],[]]
@@ -71,8 +71,9 @@ def get_ordered_list(index, orderBy, limit):
 
     for order in thisList:
         for wordObj in order[1]:
-            listing.append(wordObj)
-    
+            if len(wordObj[0]) > wordSizeMin:
+                listing.append(wordObj)
+
     listing.sort(key=lambda i:i[index], reverse = orderBy)
 
     if limit > len(listing):
